@@ -1,0 +1,23 @@
+# --- Dependencies & Build Artifacts ---
+node_modules/
+dist/
+build/
+
+# --- Environment & Configuration ---
+.env
+.env.local
+.env.*.local
+
+# --- Git & Version Control ---
+.git
+.gitignore
+
+# --- IDEs & OS Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Documentation & Logs ---
+README.md
+*.log
