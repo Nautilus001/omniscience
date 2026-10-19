@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from .models import Todo
+from .models import Container, Project, Todo
 
-class TodoSerializer(serializers.ModelSerializer):
+class ContainerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Todo
+        model = Container
+        fields = '__all__'
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
         fields = '__all__'

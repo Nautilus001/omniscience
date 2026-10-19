@@ -4,11 +4,8 @@ from status import Status
 from container import Container
 import requests
 
-url = "https://omni.nautilius.com/api/"
-
-payload = {
-    
-}
+url = "https://omni.nautilius.com/graphql/"
+PROJECT_ID = 1
 
 result = subprocess.getoutput(
     ["docker", "ps", "--format", "'{{.ID}} {{.Image}} {{.Names}} {{.Status}}'"],
@@ -18,25 +15,42 @@ print(result)
 
 containers = Container.readContainers(result.lower().split("\n"))
 
+mutation = """
+mutation ReportContainer($name: String!, $image: String!, $status: Boolean!, $projectId: Int!) {
+    upsertContainer(name: $name, image: $image, status: $status, projectId: $projectId) {
+        container {
+            id
+            name
+            status
+        }
+    }
+}
+"""
+
 for container in containers:
-    payload[container.id] = {
+    variables = {
         "name": container.name,
         "image": container.image,
-        "status": container.status
+        "status": container.status,
+        "project_id": PROJECT_ID
     }
 
-print(payload)
+    try: 
+        response = requests.post(
+            url,
+            json = {'query': mutation, 'variables': variables}
+        )
+        res_data = response.json()
 
-try:
-    response = requests.post(url, json=payload, timeout=5)
+        if "errors" in res_data:
+            print(f"Failed to report {container.name}: {res_data['errors']}")
+        else:
+            saved_container = res_data['data']['upsertContainer']['container']
+            print(f"Synced: {saved_container['name']} (ID: {saved_container['id']})")
+    except Exception as e:
+        print(f"Failed with: {e}")
 
-    response.raise_for_status()
 
-    print("Telemetry sent successfully!")
-    print("Server response: ", response.json())
-
-except requests.exceptions.RequestException as e:
-    print(f"Failed to send telementry: {e}")
 
 
 

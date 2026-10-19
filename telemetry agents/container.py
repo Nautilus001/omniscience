@@ -18,9 +18,9 @@ class Container:
             print(line)
             entries = line.split(" ")
             if "up" in entries[3]:
-                containers.append(Container(entries[0], entries[1], entries[2], "up"))
+                containers.append(Container(entries[0], entries[1], entries[2], True))
             else:
-                containers.append(Container(entries[0], entries[1], entries[2], "down"))
+                containers.append(Container(entries[0], entries[1], entries[2], False))
         return containers
 
     def checkStatus(self):
