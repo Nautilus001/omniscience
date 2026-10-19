@@ -148,4 +148,12 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://omni.nautilius.online',
+]
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAPHENE = {
+    'SCHEMA': 'telemetry.schema.schema'
+}

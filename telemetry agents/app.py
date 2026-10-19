@@ -4,7 +4,7 @@ from status import Status
 from container import Container
 import requests
 
-url = "https://omni.nautilius.com/graphql/"
+url = "https://omni.nautilius.online/graphql/"
 PROJECT_ID = 1
 
 result = subprocess.getoutput(
@@ -32,13 +32,16 @@ for container in containers:
         "name": container.name,
         "image": container.image,
         "status": container.status,
-        "project_id": PROJECT_ID
+        "projectId": PROJECT_ID
     }
 
     try: 
         response = requests.post(
             url,
-            json = {'query': mutation, 'variables': variables}
+            json = {
+                'query': mutation, 
+                'variables': variables
+            }
         )
         res_data = response.json()
 

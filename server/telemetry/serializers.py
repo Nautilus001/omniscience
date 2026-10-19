@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Container, Project, Todo
+from .models import Container, Project
 
 class ContainerSerializer(serializers.ModelSerializer):
     class Meta:
