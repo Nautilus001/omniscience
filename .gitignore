@@ -1,0 +1,38 @@
+# --- Python & Virtual Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Environment & Secrets ---
+.env
+.env.local
+
+# --- Django Specific ---
+media/
+staticfiles/
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Logs & Telemetry Data ---
+*.log
+
+# --- Client and Such ---
+node_modules/
+dist/
+build/
