@@ -44,7 +44,7 @@ for container in containers:
             }
         )
         print("STATUS CODE:", response.status_code)
-        print("RAW RESPONSE TEXT:", response.text)  # This will show the HTML error or message
+        print("RAW RESPONSE TEXT:", response.text)
         result = response.json()
         res_data = response.json()
 
