@@ -1,6 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'containers', views.ContainerViewSet)
+router.register(r'projects', views.ProjectViewSet)
 
 urlpatterns = [
-    path('containers/', views.containers, name='containers'),
+    path('', include(router.urls)),
 ]

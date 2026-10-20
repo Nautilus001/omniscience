@@ -136,7 +136,9 @@ MAILERS = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "https://omni.nautilius.online",
+    "http://localhost:120",
+    "http://localhost:8000",
 ]
 
 CORS_ALLOW_METHODS = [

@@ -35,8 +35,26 @@ class UpsertContainer(graphene.Mutation):
 
         return UpsertContainer(container=container)
 
+class UpsertProject(graphene.Mutation):
+    class Arguments:
+        name = graphene.String(required=True)
+        client = graphene.String(required=True)
+        status = graphene.Boolean(required=True)
+
+    project = graphene.Field(ProjectType)
+
+    def mutate(self, info, name, client, status):
+        project, created = Project.objects.update_or_create(
+            name = name,
+            client=client,
+            status=status
+        )
+
+        return UpsertProject(project=project)
+
 class Mutation(graphene.ObjectType):
     upsert_container = UpsertContainer.Field()
+    upsert_project = UpsertProject.Field()
 
 class Query(graphene.ObjectType):
     all_projects = graphene.List(ProjectType)

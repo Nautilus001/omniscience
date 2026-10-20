@@ -4,7 +4,7 @@ from status import Status
 from container import Container
 import requests
 
-url = "https://omni.nautilius.online/graphql/"
+url = "https://omni.nautilius.online/api/graphql/"
 PROJECT_ID = 1
 
 result = subprocess.getoutput(
@@ -43,6 +43,9 @@ for container in containers:
                 'variables': variables
             }
         )
+        print("STATUS CODE:", response.status_code)
+        print("RAW RESPONSE TEXT:", response.text)  # This will show the HTML error or message
+        result = response.json()
         res_data = response.json()
 
         if "errors" in res_data:
