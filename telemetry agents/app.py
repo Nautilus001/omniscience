@@ -43,8 +43,6 @@ for container in containers:
                 'variables': variables
             }
         )
-        print("STATUS CODE:", response.status_code)
-        print("RAW RESPONSE TEXT:", response.text)
         result = response.json()
         res_data = response.json()
 
